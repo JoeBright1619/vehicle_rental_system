@@ -26,14 +26,31 @@ def main_menu(vehicle_manager, rental_service):
             break
         else:
             print("Invalid option. Try again.")
+            pause()
 
 
 def list_available_vehicles(vehicle_manager):
-    vehicles = vehicle_manager.list_available()
+    print("1. view all available cars?")
+    print("2. view all available cars by a specific brand?")
+    choice = input("Enter your option: ")
+    if(choice=="1"):
+        vehicles = vehicle_manager.list_available()
+        print("\nAvailable Vehicles:")
+    elif(choice=="2"):
+        vehicle_brand = input("Enter the brand: ")
+        vehicles = vehicle_manager.get_vehicles_by_brand(vehicle_brand)
+        print(f"\nAvailable Vehicles by {vehicle_brand}:")
+    else:
+        print("Invalid option. Try again.")
+        pause()
+        return
+    
     if not vehicles:
         print("No vehicles available.")
+        pause()
         return
-    print("\nAvailable Vehicles:")
+        
+    
     for v in vehicles:
         print(f"{v.vehicle_id}: {v.vehicle_type()} - {v.brand} {v.model}, Price per day: {v.price_per_day}")
 

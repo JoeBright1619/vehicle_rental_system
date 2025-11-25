@@ -44,6 +44,8 @@ class VehicleManager:
     def get_vehicle_by_id(self, vehicle_id):
         return next((v for v in self.vehicles if int(v.vehicle_id) == int(vehicle_id)), None)
 
+    def get_vehicles_by_brand(self, vehicle_brand):
+        return [v for v in self.vehicles if v.brand.lower() == vehicle_brand.lower()]
     def list_available(self):
         return [v for v in self.vehicles if v.available]
 
