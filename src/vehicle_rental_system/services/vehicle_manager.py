@@ -14,7 +14,6 @@ class VehicleManager:
 
     def load_vehicles(self):
         data = self.vehicles_file.read()
-
         vehicles = []
         for v in data:
             vtype = v["type"]
@@ -36,14 +35,14 @@ class VehicleManager:
                 "type": v.vehicle_type(),
                 "brand": v.brand,
                 "model": v.model,
-                "base_price": v.base_price,
+                "base_price": v.price_per_day,
                 "available": v.available
             })
 
         self.vehicles_file.write(data)
 
     def get_vehicle_by_id(self, vehicle_id):
-        return next((v for v in self.vehicles if v.vehicle_id == vehicle_id), None)
+        return next((v for v in self.vehicles if int(v.vehicle_id) == int(vehicle_id)), None)
 
     def list_available(self):
         return [v for v in self.vehicles if v.available]

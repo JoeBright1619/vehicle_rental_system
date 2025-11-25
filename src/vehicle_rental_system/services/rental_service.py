@@ -13,11 +13,10 @@ class RentalService:
         return self.rental_file.read()
 
     def save_rentals(self):
-        self.rental_file(self.rentals)
+        self.rental_file.write(self.rentals)
 
     def rent_vehicle(self, renter_name, vehicle_id, days):
         vehicle = self.vehicle_manager.get_vehicle_by_id(vehicle_id)
-
         if not vehicle:
             return f"No vehicle found with ID {vehicle_id}."
 
