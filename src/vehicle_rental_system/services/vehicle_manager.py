@@ -9,7 +9,7 @@ from ..utils.file_handler import FileHandler
 
 class VehicleManager:
     def __init__(self):
-        self.vehicles_file = FileHandler('vehicles')
+        self.vehicles_file = FileHandler('vehicles.json')
         self.vehicles = self.load_vehicles()
 
     def load_vehicles(self):
