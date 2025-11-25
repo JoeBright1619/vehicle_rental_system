@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
 
 class Vehicle(ABC):
-    def __init__(self, vehicle_id, brand, model, base_price, available=True):
+    def __init__(self, vehicle_id, brand, model, base_price, available=True, type=None):
         self.vehicle_id = vehicle_id
         self.brand = brand
         self.model = model
         self._base_price = base_price
         self.available = available
+        self.type = type
 
     # price per day, subclasses modify this
     @property
