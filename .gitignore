@@ -1,0 +1,50 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Bytecode & cache
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.eggs/
+.cache/
+
+# --- Virtual environments ---
+venv/
+.env/
+env/
+.venv/
+
+# --- Build / packaging ---
+build/
+dist/
+*.egg
+*.whl
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Logs ---
+*.log
+
+# --- Tests ---
+.pytest_cache/
+.coverage
+coverage.xml
+
+# --- OS files ---
+Thumbs.db
+.DS_Store
+
+# --- Project-specific ---
+# If you want to exclude your data storage (optional)
+# Remove if you want JSON tracked in git
+data/*.json
