@@ -30,8 +30,9 @@ def main_menu(vehicle_manager, rental_service):
 
 
 def list_available_vehicles(vehicle_manager):
-    print("1. view all available cars?")
-    print("2. view all available cars by a specific brand?")
+    print("1. view all?")
+    print("2. view all by a specific brand?")
+    print("3. view all by a specific type(car,bike etc)?")
     choice = input("Enter your option: ")
     if(choice=="1"):
         vehicles = vehicle_manager.list_available()
@@ -40,6 +41,22 @@ def list_available_vehicles(vehicle_manager):
         vehicle_brand = input("Enter the brand: ")
         vehicles = vehicle_manager.get_vehicles_by_brand(vehicle_brand)
         print(f"\nAvailable Vehicles by {vehicle_brand}:")
+    elif(choice=="3"):
+        print("\n===Choose the type of vehicles===")
+        print("1. Car")
+        print("2. Bike")
+        print("3. Truck")
+        choice = input("Enter the number for your choice: ")
+        if(choice=="1"):
+            vehicles = vehicle_manager.get_vehicles_by_type("Car")
+        elif(choice=="2"):
+            vehicles = vehicle_manager.get_vehicles_by_type("bike")
+        elif(choice=="3"):
+            vehicles = vehicle_manager.get_vehicles_by_type("Truck")
+        else:
+            print("Invalid option. Try again.")
+            pause()
+            return
     else:
         print("Invalid option. Try again.")
         pause()
