@@ -10,7 +10,8 @@ def main_menu(vehicle_manager, rental_service):
         print("2. List rented vehicles")
         print("3. Rent a vehicle")
         print("4. Return a vehicle")
-        print("5. Exit")
+        print("5. Rent history")
+        print("9. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -27,6 +28,9 @@ def main_menu(vehicle_manager, rental_service):
             return_vehicle_cli(rental_service)
 
         elif choice == "5":
+            rental_history_cli(rental_service)
+            
+        elif choice == "9":
             print("Goodbye!")
             break
 
@@ -119,6 +123,26 @@ def return_vehicle_cli(rental_service):
     print(result)
     pause()
 
+def rental_history_cli(rental_service):
+    history = rental_service.get_rent_history()
+
+    if not history:
+        print("\nNo rental history found.\n")
+        pause()
+        return
+
+    print("\n===== RENTAL HISTORY =====\n")
+
+    for entry in history:
+        print(f"Renter:       {entry['renter']}")
+        print(f"Vehicle ID:   {entry['vehicle_id']}")
+        print(f"Days:         {entry['days']}")
+        print(f"Cost:         {entry['cost']} RWF")
+        print(f"Date:         {entry['date']}")
+        print("-" * 35)
+
+    print()
+    pause()
 
 if __name__ == "__main__":
     vm = VehicleManager()

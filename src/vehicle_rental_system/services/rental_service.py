@@ -1,6 +1,6 @@
 import json
 from ..utils.file_handler import FileHandler
-from datetime import date
+from datetime import datetime
 
 
 class RentalService:
@@ -35,7 +35,7 @@ class RentalService:
             "vehicle_id": vehicle_id,
             "days": days,
             "cost": cost,
-            "date": date.today().isoformat()
+            "date": datetime.today().isoformat()
         }
 
         self.rentals.append(rental_entry)
@@ -56,3 +56,12 @@ class RentalService:
         self.vehicle_manager.save_vehicles()
 
         return f"Vehicle {vehicle_id} has been returned successfully."
+
+    def get_rent_history(self, reverse=True):
+        """
+        Sort rentals by date.
+        reverse=True  → Most recent first
+        reverse=False → Oldest first
+        """
+        return sorted(self.rentals, key=lambda r: datetime.strptime(r["date"], "%Y-%m-%d"),
+        reverse=reverse)
