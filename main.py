@@ -4,6 +4,10 @@ from src.vehicle_rental_system.utils.helpers import pause
 
 
 def main_menu(vehicle_manager, rental_service):
+    """
+    Simple CLI router that loops through menu options and dispatches to the
+    appropriate helper based on user keyboard input.
+    """
     while True:
         print("\n=== Vehicle Rental System ===")
         print("1. List available vehicles")
@@ -40,6 +44,10 @@ def main_menu(vehicle_manager, rental_service):
 
 
 def list_available_vehicles(vehicle_manager):
+    """
+    Collect filter criteria from the user, fetch the resulting vehicles from the
+    manager, and render them in the console.
+    """
     print("\n--- Filter Options ---")
     print("1. View all")
     print("2. Filter by brand")
@@ -89,6 +97,7 @@ def list_available_vehicles(vehicle_manager):
 
 
 def list_rented_vehicles(vehicle_manager):
+    """Display the list of vehicles that are currently marked as rented."""
     vehicles = vehicle_manager.list_rented()
     if not vehicles:
         print("No rented vehicles.")
@@ -103,6 +112,10 @@ def list_rented_vehicles(vehicle_manager):
 
 
 def rent_vehicle_cli(rental_service):
+    """
+    Gather rental details from the CLI and delegate the actual rental logic to
+    the RentalService instance.
+    """
     renter_name = input("Enter your name: ").strip()
     vehicle_id = input("Enter vehicle ID: ").strip()
 
@@ -118,12 +131,14 @@ def rent_vehicle_cli(rental_service):
 
 
 def return_vehicle_cli(rental_service):
+    """Handle return prompts and hand off the work to RentalService."""
     vehicle_id = input("Enter vehicle ID to return: ").strip()
     result = rental_service.return_vehicle(vehicle_id)
     print(result)
     pause()
 
 def rental_history_cli(rental_service):
+    """Pretty-print the persisted rental history in reverse chronological order."""
     history = rental_service.get_rent_history()
 
     if not history:

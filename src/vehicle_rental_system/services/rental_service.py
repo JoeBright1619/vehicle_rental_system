@@ -4,18 +4,25 @@ from datetime import datetime
 
 
 class RentalService:
+    """Coordinate rentals/returns and persist the transaction history."""
     def __init__(self, vehicle_manager):
         self.rental_file = FileHandler("rentals.json")
         self.vehicle_manager = vehicle_manager
         self.rentals = self.load_rentals()
 
     def load_rentals(self):
+        """Load previously saved rentals into memory."""
         return self.rental_file.read()
 
     def save_rentals(self):
+        """Persist the current rentals list to disk."""
         self.rental_file.write(self.rentals)
 
     def rent_vehicle(self, renter_name, vehicle_id, days):
+        """
+        Reserve a vehicle for the requested number of days if it is available
+        and append the transaction to the rental ledger.
+        """
         vehicle = self.vehicle_manager.get_vehicle_by_id(vehicle_id)
         if not vehicle:
             return f"No vehicle found with ID {vehicle_id}."
@@ -44,6 +51,7 @@ class RentalService:
         return f"{renter_name} successfully rented {vehicle.vehicle_type()} {vehicle_id} for {days} days. Total cost: {cost}."
 
     def return_vehicle(self, vehicle_id):
+        """Flip the vehicle's availability back to True and persist the change."""
         vehicle = self.vehicle_manager.get_vehicle_by_id(vehicle_id)
 
         if not vehicle:
@@ -59,7 +67,7 @@ class RentalService:
 
     def get_rent_history(self, reverse=True):
         """
-        Sort rentals by date.
+        Return a date-sorted rental list (most recent first by default).
         reverse=True  → Most recent first
         reverse=False → Oldest first
         """
