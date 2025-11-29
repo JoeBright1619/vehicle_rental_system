@@ -71,5 +71,5 @@ class RentalService:
         reverse=True  → Most recent first
         reverse=False → Oldest first
         """
-        return sorted(self.rentals, key=lambda r: datetime.strptime(r["date"], "%Y-%m-%d"),
+        return sorted(self.rentals, key=lambda r: datetime.fromisoformat(r["date"]),
         reverse=reverse)
