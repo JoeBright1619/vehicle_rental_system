@@ -134,7 +134,6 @@ python main.py
 
 Upon starting, you'll see the main menu:
 
-
 ![ Main Menu Screen](docs/screenshots/main-menu.png)
 
 ### Feature Guide
@@ -147,11 +146,9 @@ View all available vehicles or filter by:
 - **By brand**: Filter vehicles by specific brand (e.g., "Toyota", "Honda")
 - **By type**: Filter by vehicle type (Car, Bike, or Truck)
 
-
 **Example Output:**
 
 ![ Available Vehicles List](docs/screenshots/available-vehicles.png)
-
 
 #### 2. List Rented Vehicles
 
@@ -173,8 +170,6 @@ The system will:
 - Calculate total cost based on vehicle type
 - Update vehicle status
 - Record the transaction in rental history
-
-
 
 **Example:**
 
@@ -199,8 +194,6 @@ View all rental transactions in reverse chronological order (most recent first).
 - Number of days
 - Total cost (in RWF)
 - Rental date
-
-
 
 **Example Output:**
 
@@ -258,14 +251,97 @@ Stores rental transaction history:
 
 ### Running Tests
 
-The project includes a `tests/` directory structure ready for test implementation. To add tests:
+The project includes a comprehensive test suite using pytest. The tests cover models, services, and utilities with high coverage.
+
+#### Installing Test Dependencies
+
+First, install the required testing packages:
 
 ```bash
-# Install testing dependencies (if using pytest)
-poetry add --dev pytest
+poetry add --dev pytest pytest-cov pytest-mock
+```
 
-# Run tests
+#### Test Structure
+
+The test suite is organized as follows:
+
+```
+tests/
+├── __init__.py           # Package initialization
+├── conftest.py           # Shared fixtures and pytest configuration
+├── test_models.py        # Tests for vehicle model classes
+├── test_services.py      # Tests for VehicleManager and RentalService
+└── test_utils.py         # Tests for utility classes and functions
+```
+
+#### Running Tests
+
+Run all tests:
+
+```bash
 pytest
+```
+
+Run tests with verbose output:
+
+```bash
+pytest -v
+```
+
+Run tests with coverage report:
+
+```bash
+pytest --cov=src/vehicle_rental_system --cov-report=html --cov-report=term
+```
+
+Run a specific test file:
+
+```bash
+pytest tests/test_models.py
+```
+
+Run a specific test:
+
+```bash
+pytest tests/test_models.py::TestCar::test_car_pricing_applies_20_percent_surcharge
+```
+
+#### Test Coverage
+
+The test suite covers:
+
+- **Models (`test_models.py`)**:
+  - Vehicle abstract class behavior
+  - Car, Bike, and Truck inheritance
+  - Pricing calculations for each vehicle type
+  - Polymorphic behavior
+- **Services (`test_services.py`)**:
+  - VehicleManager: Loading, saving, and querying vehicles
+  - RentalService: Renting, returning, and rental history
+  - Error handling for invalid operations
+- **Utils (`test_utils.py`)**:
+  - FileHandler: JSON file read/write operations
+  - Helper functions
+
+#### Writing New Tests
+
+When adding new features, ensure you:
+
+1. Add tests in the appropriate test file
+2. Follow the existing test naming conventions (`test_*`)
+3. Use descriptive test names that explain what is being tested
+4. Add fixtures in `conftest.py` for reusable test data
+5. Mock file I/O operations to keep tests isolated
+
+Example test structure:
+
+```python
+def test_feature_does_something():
+    """Test that feature performs expected behavior."""
+    # Arrange
+    # Act
+    # Assert
+    pass
 ```
 
 ### Adding New Vehicle Types

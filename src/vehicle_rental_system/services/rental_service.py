@@ -31,6 +31,7 @@ class RentalService:
             return f"{vehicle.vehicle_type()} {vehicle_id} is already rented."
 
         # calculate cost using polymorphism (price_per_day)
+        vehicle.price_per_day
         cost = vehicle.price_per_day * days
 
         # update state
